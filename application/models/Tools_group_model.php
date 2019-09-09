@@ -53,8 +53,7 @@ class Tools_group_model extends CI_Model{
 	}
 
 	public function getToolGroups(){
-		$this->db->select('name')->from('tool_group');
-		$query = $this->db->get();
+		$query = $this->query("select tool_group.name, users.username from users, tool_group, users_tools_group where users_tools_group.user_id = users.id and users_tools_group.tool_group_id=tool_group.id");
 
 		if($query->num_rows() > 0){
 			// var_dump($query->result_array());
