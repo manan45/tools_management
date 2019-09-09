@@ -1,0 +1,59 @@
+CREATE TABLE tools_management.users (
+	username varchar(100) NOT NULL,
+	password varchar(100) NOT NULL,
+	id INT NOT NULL AUTO_INCREMENT,
+	CONSTRAINT users_PK PRIMARY KEY (id)
+)
+ENGINE=InnoDB
+DEFAULT CHARSET=latin1
+COLLATE=latin1_swedish_ci
+COMMENT='user table to store the information of the user';
+
+
+
+CREATE TABLE tools_management.tools (
+	id INT NOT NULL AUTO_INCREMENT,
+	name varchar(100) NOT NULL,
+	cost INT NOT NULL,
+	CONSTRAINT tools_PK PRIMARY KEY (id)
+)
+ENGINE=InnoDB
+DEFAULT CHARSET=latin7
+COLLATE=latin7_general_ci
+COMMENT='tool table to store tools information';
+
+
+CREATE TABLE tools_management.tool_group (
+	id INT NOT NULL AUTO_INCREMENT,
+	name varchar(100) NOT NULL,
+	CONSTRAINT tool_group_PK PRIMARY KEY (id)
+)
+ENGINE=InnoDB
+DEFAULT CHARSET=latin1
+COLLATE=latin1_swedish_ci;
+
+CREATE TABLE tools_management.tools_details (
+	tool_id INT NULL,
+	tool_group_id INT NULL,
+	CONSTRAINT tools_details_FK FOREIGN KEY (tool_id) REFERENCES tools_management.tools(id),
+	CONSTRAINT tools_details_FK_1 FOREIGN KEY (tool_group_id) REFERENCES tools_management.tool_group(id)
+)
+ENGINE=InnoDB
+DEFAULT CHARSET=latin1
+COLLATE=latin1_swedish_ci;
+
+
+CREATE TABLE tools_management.users_tools_group (
+	tool_group_id INT NULL,
+	user_id INT NULL,
+	CONSTRAINT users_tools_group_FK FOREIGN KEY (user_id) REFERENCES tools_management.users(id),
+	CONSTRAINT users_tools_group_FK_1 FOREIGN KEY (tool_group_id) REFERENCES tools_management.tool_group(id)
+)
+ENGINE=InnoDB
+DEFAULT CHARSET=latin1
+COLLATE=latin1_swedish_ci;
+
+
+
+
+
